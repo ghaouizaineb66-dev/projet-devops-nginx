@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB_USER/$IMAGES_NAME:$BUILD_NUMBER .'
+                sh 'docker build -t zainebgh/projet-devops-nginx:$BUILD_NUMBER .'
             }
         }
         stage('Push Docker Hub') {
@@ -27,7 +27,7 @@ pipeline {
                 )]) {
                     sh '''
                     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker push $DOCKERHUB_USER/$IMAGE_NAME:$BUILD_NUMBER
+                    docker push zainebgh/projet-devops-nginx:$BUILD_NUMBER
                     docker logout
                     '''
                  }
@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Deploy kubernetes') {
             steps {
-                sh 'kubectl set image deployment/nginx-deployment nginx=$DOCKERHUB_USER/$IMAGE_NAME:$BUILD_NUMBER'
+                sh 'kubectl set image deployment/nginx-deployment nginx=zainebgh/projet-devops-nginx:$BUILD_NUMBER'
                 sh 'kubectl rollout status deployment/nginx-deployment'
             }
         }
