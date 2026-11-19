@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: projet-devops-nginx:1.0
-          imagePullPolicy: Never
+          image: zainebgh/projet-devops-nginx:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80

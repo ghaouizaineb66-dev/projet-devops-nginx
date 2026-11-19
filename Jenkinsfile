@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'projet-devops-nginx'
         DOCKERHUB_USER = 'zainebgh'
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
     stages {
         stage('Checkout') {
