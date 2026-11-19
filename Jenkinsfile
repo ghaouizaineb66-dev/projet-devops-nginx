@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB-USER/$IMAGES_NAME:$BUILD_NUMBER .'
+                sh 'docker build -t $DOCKERHUB_USER/$IMAGES_NAME:$BUILD_NUMBER .'
             }
         }
         stage('Push Docker Hub') {
