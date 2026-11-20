@@ -305,6 +305,92 @@
     <p>Projet DevOps — GitHub | Jenkins | Docker | Kubernetes | Nginx</p>
     <p>© 2026 - Web Application Deployment</p>
 </footer>
+<section class="container">
+    <h2 class="section-title">Live Infrastructure Monitoring</h2>
 
+    <section class="stats">
+        <div class="stat">
+            <h2 id="jenkins-status">Loading...</h2>
+            <p>Jenkins Build Status</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="build-number">-</h2>
+            <p>Latest Build Number</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="pods-running">-</h2>
+            <p>Running Kubernetes Pods</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="pods-total">-</h2>
+            <p>Total Kubernetes Pods</p>
+        </div>
+    </section>
+
+    <h2 class="section-title">Kubernetes Pods Details</h2>
+    <div class="pipeline" id="pods-details">
+        Loading Kubernetes data...
+    </div>
+
+    <p id="last-update" style="color:#94a3b8; margin-top:15px;">
+        Waiting for API...
+    </p>
+</section>
+
+<script>
+const API_URL = "http://192.168.56.128:3001";
+
+async function updateDashboard() {
+    try {
+        const [jenkinsResponse, kubernetesResponse] = await Promise.all([
+            fetch(`${API_URL}/api/jenkins`),
+            fetch(`${API_URL}/api/kubernetes`)
+        ]);
+
+        if (!jenkinsResponse.ok || !kubernetesResponse.ok) {
+            throw new Error("API connection failed");
+        }
+
+        const jenkins = await jenkinsResponse.json();
+        const kubernetes = await kubernetesResponse.json();
+
+        document.getElementById("jenkins-status").textContent =
+            jenkins.build.result || "BUILDING";
+
+        document.getElementById("build-number").textContent =
+            "#" + jenkins.build.number;
+
+        document.getElementById("pods-running").textContent =
+            kubernetes.runningPods;
+
+        document.getElementById("pods-total").textContent =
+            kubernetes.totalPods;
+
+        document.getElementById("pods-details").innerHTML =
+            kubernetes.pods.map(pod => `
+                <p style="padding:10px; border-bottom:1px solid #334155;">
+                    ${pod.name} — ${pod.status}
+                    — Ready: ${pod.ready ? "Yes" : "No"}
+                    — Restarts: ${pod.restarts}
+                </p>
+            `).join("");
+
+        document.getElementById("last-update").textContent =
+            "Last update: " + new Date().toLocaleTimeString();
+
+    } catch (error) {
+        document.getElementById("jenkins-status").textContent = "Offline";
+        document.getElementById("pods-details").textContent =
+            "Unable to connect to Backend API";
+        console.error(error);
+    }
+}
+
+updateDashboard();
+setInterval(updateDashboard, 10000);
+</script>
 </body>
 </html>
