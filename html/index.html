@@ -1,24 +1,310 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-<head> <meta charset="UTF-8">
- <title>Projet DEvOps</title>
- <style>
-  body {
-   background-color: #172554;
-   color: white;
-   font-family: Arial;
-   text-align: center;
-   padding-top: 100px;
-  }
-  h1 {
-   color: #38bdf8;
-  }
-  </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        header {
+            background: #111c35;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #263653;
+        }
+
+        header h2 {
+            color: #38bdf8;
+            font-size: 24px;
+        }
+
+        .header-status {
+            color: #4ade80;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 50px 25px;
+        }
+
+        .hero {
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .section-title {
+            font-size: 21px;
+            margin: 35px 0 20px;
+            color: white;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+
+        .card .icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .status {
+            color: #4ade80 !important;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .pipeline {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+        }
+
+        .step {
+            background: #263653;
+            padding: 18px 10px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .step strong {
+            display: block;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+
+        .step span {
+            color: #4ade80;
+            font-size: 13px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+
+        .stat {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .stat h2 {
+            color: #38bdf8;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            border-top: 1px solid #263653;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            header {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
- <h1>Infrastructure Web DevOps - Version 2</h1>
- <h2>CI/CD - Docker - Kubernetes</h2>
- <p>Application déployée avec Nginx</p>
- <p>Haute Disponibilité</p>
+
+<header>
+    <h2>DevOps Project</h2>
+    <div class="header-status">● Application déployée</div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>Infrastructure Web <span>DevOps</span></h1>
+        <p>
+            Projet d'automatisation du déploiement d'une application Web
+            avec une pipeline CI/CD utilisant Docker, Jenkins et Kubernetes.
+        </p>
+    </section>
+
+    <h2 class="section-title">Technologies utilisées</h2>
+
+    <section class="cards">
+
+        <div class="card">
+            <div class="icon">📁</div>
+            <h3>Git & GitHub</h3>
+            <p>Gestion du code source et suivi des modifications du projet.</p>
+            <p class="status">● Repository connecté</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚙️</div>
+            <h3>Jenkins</h3>
+            <p>Automatisation des étapes de la pipeline CI/CD.</p>
+            <p class="status">● Build réussi</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🐳</div>
+            <h3>Docker</h3>
+            <p>Création et gestion de l'image Docker de l'application.</p>
+            <p class="status">● Image créée</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">☸️</div>
+            <h3>Kubernetes</h3>
+            <p>Orchestration et gestion des conteneurs avec Minikube.</p>
+            <p class="status">● 3 Pods disponibles</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌐</div>
+            <h3>Nginx</h3>
+            <p>Serveur Web chargé de distribuer l'application.</p>
+            <p class="status">● Service disponible</p>
+        </div>
+
+    </section>
+
+    <h2 class="section-title">Pipeline CI/CD</h2>
+
+    <section class="pipeline">
+        <div class="steps">
+            <div class="step">
+                <strong>01. Git</strong>
+                <span>✓ Code source</span>
+            </div>
+
+            <div class="step">
+                <strong>02. Jenkins</strong>
+                <span>✓ Pipeline</span>
+            </div>
+
+            <div class="step">
+                <strong>03. Docker</strong>
+                <span>✓ Build Image</span>
+            </div>
+
+            <div class="step">
+                <strong>04. Docker Hub</strong>
+                <span>✓ Push Image</span>
+            </div>
+
+            <div class="step">
+                <strong>05. Kubernetes</strong>
+                <span>✓ Deployment</span>
+            </div>
+        </div>
+    </section>
+
+    <h2 class="section-title">État de l'infrastructure</h2>
+
+    <section class="stats">
+        <div class="stat">
+            <h2>3 / 3</h2>
+            <p>Pods disponibles</p>
+        </div>
+
+        <div class="stat">
+            <h2>80</h2>
+            <p>Port du service Nginx</p>
+        </div>
+
+        <div class="stat">
+            <h2>30080</h2>
+            <p>NodePort Kubernetes</p>
+        </div>
+
+        <div class="stat">
+            <h2>V2</h2>
+            <p>Version de l'application</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Projet DevOps — GitHub | Jenkins | Docker | Kubernetes | Nginx</p>
+    <p>© 2026 - Web Application Deployment</p>
+</footer>
+
 </body>
 </html>
